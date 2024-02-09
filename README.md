@@ -1,6 +1,12 @@
 # docker-node-discordbot
 A Discord Bot with a Webinterface
 
+### Docker Services
+ - [node - discord.js] discord bot
+ - [node - express] web-app
+ - MariaDB-Server
+ - PHPMyAdmin
+
 
 ### Installation Instructions 
 
