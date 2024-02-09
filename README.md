@@ -20,7 +20,10 @@ git clone https://github.com/sfrankwyl3110/docker-node-discordbot.git
 cd docker-node-discordbot
 ```
 
-### Insert your Bot-Token from "https://discord.com/developers/applications/xxxxxxxxxxxxxxxxxx/bot" to src/bot/config.json
+### Insert your Bot-Token into src/bot/config.json
+
+*obtainable from "https://discord.com/developers/applications/[APPLICATION-ID]/bot"*
+
 ### Insert your clientId and guildId from your Discord Server
 
 ```
