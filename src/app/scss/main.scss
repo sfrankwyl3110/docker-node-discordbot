@@ -1,0 +1,18 @@
+/* ---- Variables ---------------------------------------------------- */
+
+$color_red: rgb(135, 173, 119);
+$body_top_padding: 50px;
+
+/* ------------------------------------------------------------------- */
+
+// body padding
+
+body { 
+    padding-top: $body_top_padding 
+}
+
+// headlines - colors
+
+h2 {
+    color: $color_red;
+}

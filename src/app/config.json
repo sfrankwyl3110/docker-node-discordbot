@@ -1,0 +1,12 @@
+{
+    "BOT_TOKEN": "",
+    "clientId": "",
+    "guildId": "",
+    "database": {
+        "host": "db",
+        "port": 3316,
+        "user": "discordbot",
+        "password": "qwert",
+        "database": "discordbot"
+    }
+}

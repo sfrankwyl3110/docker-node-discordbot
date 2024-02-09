@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container-fluid">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+<style>
+    .th_enabled, .td_enabled, .th_createdAt, .td_createdAt, .th_updatedAt, .td_updatedAt {
+        text-align: center;
+    }
+</style>
+
+
+<main>
+  <div class="jumbotron">
+    <div>
+        <h2>Commands</h2>
+    </div>
+    <table id="myTable" class="display" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>description</th>
+                <th>author</th>
+                <th class="th_enabled">enabled</th>
+                <th class="th_createdAt">createdAt</th>
+                <th class="th_updatedAt">updatedAt</th>
+                <th>[actions]</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <% for (var i = 0; i < commands.length; i++) { %>
+                <tr>
+                    <td><%= commands[i].id %></td>
+                    <td><%= commands[i].name %></td>
+                    <td><%= commands[i].description %></td>
+                    <td><%= commands[i].author %></td>
+                    <td class="td_enabled"><% 
+                        if(commands[i].enabled == 0) {  %>
+                            true <%
+                         } else {  %>
+                            false <%
+                        } %></td>
+                    <td class="td_createdAt"><%= commands[i].createdAt %></td>
+                    <td class="td_updatedAt"><%= commands[i].updatedAt %></td>
+                    <td data-id="actions-btn-row"></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

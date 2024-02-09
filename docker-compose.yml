@@ -1,0 +1,70 @@
+version: '3'
+volumes:
+  data:
+services:
+  bot:
+    container_name: discordbot-bot
+    build:
+      context: .
+      dockerfile: Dockerfile.Bot
+    links: 
+      - db
+    depends_on: 
+      db:
+        condition: service_healthy
+    volumes:
+      - ./src/bot:/home/node/app/bot
+  db:
+    container_name: discordbot-db
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: qwert
+      MYSQL_DATABASE: discordbot
+      MYSQL_USER: discordbot
+      MYSQL_PASSWORD: qwert
+      MYSQL_TCP_PORT: 3316
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./dev/mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3316:3316"
+    healthcheck:
+      interval: 5s
+      retries: 5
+      test:
+        [
+          "CMD",
+          "healthcheck.sh",
+          "--su-mysql",
+          "--connect",
+          "--innodb_initialized"
+        ]
+      timeout: 10s
+  app:
+    container_name: discordbot-app
+    build:
+      context: .
+      dockerfile: Dockerfile.App
+    links: 
+      - db
+    depends_on: 
+      db:
+        condition: service_healthy
+    volumes:
+      - ./src/app:/home/node/app/src
+  phpmyadmin:
+    container_name: discordbot-phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    links:
+      - db
+    ports:
+      - 8183:80
+    environment:
+      MYSQL_USERNAME: discordbot
+      PMA_HOSTS: db
+      MYSQL_ROOT_PASSWORD: qwert
+      PMA_ARBITRARY: 1
+    depends_on: 
+      - db
